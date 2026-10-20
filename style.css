@@ -1,0 +1,70 @@
+        :root {
+            --gc-red: #AF3C43;
+            --gc-flag-red: #FF0000;
+            --gc-blue: #284162;
+            --gc-dark-navy: #26374A;
+            --gc-link: #284162;
+            --gc-alert-yellow: #EE7100;
+            --gc-info-blue: #269ABC;
+        }
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            color: #333333;
+            background-color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .gc-heading {
+            font-family: 'Lato', sans-serif;
+        }
+        .arcade-font {
+            font-family: 'Press Start 2P', monospace;
+        }
+        /* Official GC Red H1 underline */
+        .gc-h1-border {
+            border-bottom: 4px solid var(--gc-red);
+            padding-bottom: 0.4rem;
+            margin-bottom: 1.25rem;
+        }
+        /* Service Card hover states */
+        .gc-service-card {
+            border: 1px solid #e0e0e0;
+            border-bottom: 4px solid var(--gc-dark-navy);
+            transition: all 0.15s ease-in-out;
+        }
+        .gc-service-card:hover {
+            border-color: var(--gc-blue);
+            border-bottom-color: var(--gc-red);
+            background-color: #f4f7fa;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .gc-service-card.active-game {
+            border: 2px solid var(--gc-red);
+            border-bottom: 5px solid var(--gc-red);
+            background-color: #fff8f8;
+        }
+        /* Retro CRT Scanline Effect for Canvas */
+        .crt-overlay {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            ), linear-gradient(
+                90deg,
+                rgba(255, 0, 0, 0.03),
+                rgba(0, 255, 0, 0.01),
+                rgba(0, 0, 255, 0.03)
+            );
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+        canvas {
+            image-rendering: pixelated;
+            touch-action: none;
+            user-select: none;
+        }
+        /* Official GC Landscape Footer background pattern */
+        .gc-footer-landscape {
+            background-color: #26374a;
+            background-image: radial-gradient(#334960 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
