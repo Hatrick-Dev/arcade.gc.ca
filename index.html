@@ -27,12 +27,8 @@
             <div class="flex flex-wrap justify-between items-center gap-4 pb-3">
                 <!-- Government of Canada Signature (Replaced) -->
                 <a href="#" onclick="resetToDashboard(); return false;" class="flex items-center space-x-3 group focus:outline-none">
-                    <!-- Accurate 11-Point Maple Leaf Flag SVG -->
-                    <svg class="w-16 h-8 sm:w-20 sm:h-10 flex-shrink-0 shadow-sm border border-gray-200" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="600" height="300" fill="#d52b1e"/>
-                        <rect x="150" width="300" height="300" fill="#ffffff"/>
-                        <path fill="#d52b1e" d="M300 24.3l11.4 35 29.8-9-11 32 30.6-21.4-15 42.6 37.7 20-39.6 15 16.5 25.5-38.3-21.7-18.7 30 5.4 37.8H292V275h16v25H292v-25h-16v25h-16v-25h16v-65h-8.8l5.4-37.8-18.7-30-38.3 21.7 16.5-25.5-39.6-15 37.7-20-15-42.6 30.6 21.4-11-32 29.8 9 11.4-35z"/>
-                    </svg>
+                    <!-- Perfect Flag via Wikimedia Commons -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" alt="Flag of Canada" class="w-16 h-8 sm:w-20 sm:h-10 flex-shrink-0 shadow-sm border border-gray-200 object-cover" />
                     <div class="text-xs sm:text-sm font-black text-red-700 uppercase tracking-tight max-w-[200px] sm:max-w-xs leading-tight">
                         THIS IS NOT AN OFFICIAL CANADIAN GOVERNMENT WEBSITE
                     </div>
@@ -154,11 +150,10 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE ARCADE CABINET & NATIONAL REGISTRY GRID -->
-        <section id="arcade-cabinet" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- LEFT 8 COLS: THE HTML5 ARCADE CABINET -->
-            <div class="lg:col-span-8 bg-[#1e293b] border-4 border-[#26374A] rounded-lg shadow-xl overflow-hidden">
+        <!-- INTERACTIVE ARCADE CABINET -->
+        <!-- Fix: Removed grid to allow the cabinet to center and fully display the bottom controls -->
+        <section id="arcade-cabinet" class="max-w-4xl mx-auto items-start mb-8">
+            <div class="bg-[#1e293b] border-4 border-[#26374A] rounded-lg shadow-xl overflow-hidden">
                 <!-- Cabinet Marquee Header -->
                 <div class="bg-[#AF3C43] text-white px-4 py-3 flex flex-wrap justify-between items-center border-b-4 border-yellow-400">
                     <div class="flex items-center space-x-3">
@@ -200,15 +195,102 @@
                     </div>
                 </div>
 
-                <!-- On-Screen Touch / Mouse Controls & Instructions Footer -->
-                <div class="bg-[#0f172a] text-gray-200 p-3 sm:p-4 border-t border-gray-700">
+                <!-- RESTORED: On-Screen Touch / Mouse Controls & Instructions Footer -->
+                <div class="bg-[#0f172a] text-gray-200 p-3 sm:p-4 border-t border-gray-700 w-full block">
                     <div class="flex flex-wrap items-center justify-between gap-3">
-                        <!-- Touch / Click D-Pad & Action Buttons -->
+                        <!-- Touch / Click D-Pad -->
                         <div class="flex items-center space-x-2">
-                            <button onmousedown="triggerInput('left', true)" onmouseup="triggerInput('left', false)" ontouchstart="triggerInput('left', true); return false;" ontouchend="triggerInput('left', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none">
+                            <button onmousedown="triggerInput('left', true)" onmouseup="triggerInput('left', false)" ontouchstart="triggerInput('left', true); return false;" ontouchend="triggerInput('left', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none cursor-pointer">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
-                            <button onmousedown="triggerInput('up', true)" onmouseup="triggerInput('up', false)" ontouchstart="triggerInput('up', true); return false;" ontouchend="triggerInput('up', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none">
+                            <button onmousedown="triggerInput('up', true)" onmouseup="triggerInput('up', false)" ontouchstart="triggerInput('up', true); return false;" ontouchend="triggerInput('up', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none cursor-pointer">
                                 <i class="fa-solid fa-arrow-up"></i>
                             </button>
-                            <button onmousedown="triggerInput('down', true)" onmouseup="triggerInput('down', false)" ontouchstart="triggerInput('down', true); return false;" ontouchend="triggerInput('down', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray
+                            <button onmousedown="triggerInput('down', true)" onmouseup="triggerInput('down', false)" ontouchstart="triggerInput('down', true); return false;" ontouchend="triggerInput('down', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none cursor-pointer">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </button>
+                            <button onmousedown="triggerInput('right', true)" onmouseup="triggerInput('right', false)" ontouchstart="triggerInput('right', true); return false;" ontouchend="triggerInput('right', false); return false;" class="bg-gray-700 hover:bg-gray-600 active:bg-[#AF3C43] text-white px-4 py-2.5 rounded font-bold shadow border-b-2 border-gray-900 select-none cursor-pointer">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Primary Action Button -->
+                        <div class="flex items-center space-x-3">
+                            <button onmousedown="triggerInput('action', true)" onmouseup="triggerInput('action', false)" ontouchstart="triggerInput('action', true); return false;" ontouchend="triggerInput('action', false); return false;" class="bg-[#AF3C43] hover:bg-red-700 active:bg-yellow-500 text-white font-bold px-5 py-2.5 rounded shadow border-b-2 border-red-950 text-xs sm:text-sm uppercase tracking-wider select-none cursor-pointer">
+                                <i class="fa-solid fa-bolt mr-1"></i> <span id="actionBtnLabel" data-i18n="actionBtn">ACTION / SPACE</span>
+                            </button>
+                        </div>
+                    </div>
+                    <p id="controlsHelpBar" class="text-xs text-gray-400 mt-2.5 font-mono">
+                        <i class="fa-regular fa-keyboard mr-1 text-yellow-400"></i>
+                        <span data-i18n="controlsHintPothole">WASD or Arrow Keys to steer | Space to honk horn</span>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE DETAILS / REPORT A PROBLEM / DATE MODIFIED -->
+        <div class="mt-8 pt-6 border-t border-gray-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-sm">
+            <div class="flex flex-wrap gap-3">
+                <button onclick="showOfficialModal('problem')" class="bg-[#eaebed] hover:bg-[#cfd1d5] text-gray-800 font-semibold px-4 py-2 rounded border border-gray-300 transition" data-i18n="reportProblemBtn">
+                    Feedback
+                </button>
+            </div>
+            <dl class="text-xs text-gray-600">
+                <dt class="inline font-semibold" data-i18n="dateModifiedLabel">Date modified:</dt>
+                <dd class="inline font-mono">2026-10-17</dd>
+            </dl>
+        </div>
+
+    </main>
+
+    <!-- OFFICIAL GOVERNMENT OF CANADA FOOTER -->
+    <footer class="mt-8">
+        <!-- Dark Blue Landscape Band -->
+        <div class="gc-footer-landscape text-white py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-lg font-bold mb-4 border-b border-gray-600 pb-2" data-i18n="footerHeader">
+                    Made by Hatrick-Dev
+                </h3>
+            </div>
+        </div>
+
+        <!-- Bottom White Bar with Sub-Links & Classic "Canada" Wordmark -->
+        <div class="bg-[#f8f8f8] py-6 border-t border-gray-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                <!-- Sub-footer links -->
+                <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm text-[#284162]">
+                    <li><a href="https://www.instagram.com/hatrickhd/" class="underline hover:text-blue-900" data-i18n="subFooter1">Social media</a></li>
+                </ul>
+
+                <!-- Official "Canada" Wordmark using accurate Font and SVG flag -->
+                <div class="flex items-end select-none ml-auto sm:ml-0 mt-2">
+                    <div class="relative inline-block pr-6">
+                        <span class="text-3xl sm:text-4xl font-bold text-black" style="font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif; letter-spacing: -0.05em;">Canada</span>
+                        <!-- Perfect Little Flag for the Logo via Wikimedia Commons -->
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" class="w-8 h-4 absolute -top-1.5 -right-1 shadow-sm border border-gray-200 object-cover" alt="Flag">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OFFICIAL GOVERNMENT MODAL (FOR STATUTORY NOTICES) -->
+    <div id="gcModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white border-t-8 border-[#AF3C43] rounded shadow-2xl max-w-lg w-full overflow-hidden">
+            <div class="px-6 py-4 bg-gray-100 border-b border-gray-300 flex justify-between items-center">
+                <h3 id="modalTitle" class="font-bold text-lg text-[#26374A]">Official Notice</h3>
+                <button onclick="closeModal()" class="text-gray-600 hover:text-black text-xl font-bold">&times;</button>
+            </div>
+            <div id="modalContent" class="p-6 text-sm text-gray-800 space-y-3">
+                <!-- Dynamic Modal Content -->
+            </div>
+            <div class="px-6 py-3 bg-gray-100 border-t border-gray-300 flex justify-end">
+                <button onclick="closeModal()" class="bg-[#26374A] hover:bg-[#1c2938] text-white font-semibold px-5 py-2 rounded text-sm" data-i18n="closeBtn">
+                    Acknowledge &amp; Close
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
