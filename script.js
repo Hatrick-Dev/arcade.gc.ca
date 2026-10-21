@@ -928,4 +928,435 @@ function updateAndDrawGoose() {
         ctx.fillStyle = al.text.includes('PACIFIED') ? '#fef08a' : '#f87171';
         ctx.font = 'bold 12px monospace';
         ctx.textAlign = 'center';
-        ctx.
+        ctx.fillText(al.text, al.x, al.y);
+        if (al.timer <= 0) st.honkAlerts.splice(i, 1);
+    }
+
+    ctx.fillStyle = '#92400e';
+    ctx.fillRect(st.playerX - 24, 378, 48, 30);
+    ctx.fillStyle = '#fef3c7';
+    ctx.fillRect(st.playerX - 26, 374, 52, 7);
+    ctx.font = '18px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🥯', st.playerX, 398);
+}
+
+function drawCanadaGoose(x, y, wingPhase) {
+    const wingY = Math.sin(wingPhase) * 10;
+    ctx.strokeStyle = '#57534e';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.moveTo(x - 26, y + wingY);
+    ctx.quadraticCurveTo(x - 12, y - 8, x, y);
+    ctx.quadraticCurveTo(x + 12, y - 8, x + 26, y + wingY);
+    ctx.stroke();
+
+    ctx.fillStyle = '#78716c';
+    ctx.beginPath();
+    ctx.ellipse(x, y, 14, 10, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(x - 4, y + 6, 8, 14);
+    ctx.beginPath();
+    ctx.arc(x, y + 20, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(x - 5, y + 17, 10, 3);
+
+    ctx.fillStyle = '#ef4444';
+    ctx.fillRect(x - 3, y + 20, 2, 2);
+    ctx.fillRect(x + 1, y + 20, 2, 2);
+}
+
+/***********************************************************************
+ * GAME 3: MAPLE SYRUP TAPPER
+ ***********************************************************************/
+const TAPPER_LANES_Y = [125, 245, 365];
+let tapperState = {
+    lane: 1,
+    jugs: [],
+    patrons: [],
+    popups: [],
+    cooldown: 0
+};
+
+function initTapperGame() {
+    tapperState.lane = 1;
+    tapperState.jugs = [];
+    tapperState.patrons = [];
+    tapperState.popups = [];
+    tapperState.cooldown = 0;
+}
+
+function slideSyrupJug() {
+    if (tapperState.cooldown > 0) return;
+    tapperState.jugs.push({
+        lane: tapperState.lane,
+        x: 135
+    });
+    tapperState.cooldown = 14;
+    playSound('throw');
+}
+
+function updateAndDrawTapper() {
+    const st = tapperState;
+    if (st.cooldown > 0) st.cooldown--;
+
+    const spawnInterval = Math.max(38, 82 - Math.floor(score / 220));
+    if (frameCount % spawnInterval === 0) {
+        const lane = Math.floor(Math.random() * 3);
+        const roles = [
+            { icon: '🪓', label: 'Lumberjack', color: '#dc2626' },
+            { icon: '🤠', label: 'Mountie', color: '#b91c1c' },
+            { icon: '🏒', label: 'Goalie', color: '#1d4ed8' }
+        ];
+        const role = roles[Math.floor(Math.random() * roles.length)];
+        st.patrons.push({
+            lane,
+            x: canvas.width - 55,
+            speed: 1.1 + Math.min(1.6, score / 2000),
+            role
+        });
+    }
+
+    ctx.fillStyle = '#451a03';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    TAPPER_LANES_Y.forEach((y, idx) => {
+        ctx.fillStyle = '#78350f';
+        ctx.fillRect(20, y - 55, 52, 80);
+        ctx.fillStyle = '#94a3b8';
+        ctx.fillRect(72, y - 18, 16, 8);
+
+        ctx.fillStyle = '#92400e';
+        ctx.fillRect(110, y, canvas.width - 150, 22);
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillRect(110, y, canvas.width - 150, 6);
+
+        ctx.fillStyle = (st.lane === idx) ? '#facc15' : '#a8a29e';
+        ctx.font = 'bold 13px monospace';
+        ctx.textAlign = 'left';
+        ctx.fillText(`TAP #${idx + 1}`, 24, y - 35);
+    });
+
+    const activeY = TAPPER_LANES_Y[st.lane];
+    ctx.fillStyle = '#AF3C43';
+    ctx.fillRect(84, activeY - 38, 32, 38);
+    ctx.font = '24px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🍁', 100, activeY - 12);
+
+    for (let i = st.jugs.length - 1; i >= 0; i--) {
+        const j = st.jugs[i];
+        j.x += 7.5;
+        const jy = TAPPER_LANES_Y[j.lane] - 22;
+
+        ctx.fillStyle = '#d97706';
+        ctx.fillRect(j.x, jy, 18, 22);
+        ctx.fillStyle = '#fef3c7';
+        ctx.fillRect(j.x + 4, jy + 5, 10, 8);
+
+        if (j.x > canvas.width - 45) {
+            playSound('crash');
+            lives--;
+            updateHUD();
+            st.popups.push({ x: canvas.width - 90, y: jy, text: "SYRUP SPILLED!", timer: 30 });
+            st.jugs.splice(i, 1);
+            if (lives <= 0) {
+                endGame();
+                return;
+            }
+        }
+    }
+
+    for (let i = st.patrons.length - 1; i >= 0; i--) {
+        const p = st.patrons[i];
+        p.x -= p.speed;
+        const py = TAPPER_LANES_Y[p.lane] - 34;
+
+        ctx.fillStyle = p.role.color;
+        ctx.fillRect(p.x - 16, py + 8, 32, 26);
+        ctx.font = '24px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(p.role.icon, p.x, py + 24);
+
+        let served = false;
+        for (let k = st.jugs.length - 1; k >= 0; k--) {
+            const jug = st.jugs[k];
+            if (jug.lane === p.lane && Math.abs(jug.x - p.x) < 26) {
+                served = true;
+                st.jugs.splice(k, 1);
+                score += 150;
+                updateHUD();
+                playSound('pickup');
+                st.popups.push({ x: p.x, y: py, text: "MERCI / THANKS! +150", timer: 25 });
+                break;
+            }
+        }
+
+        if (served) {
+            st.patrons.splice(i, 1);
+            continue;
+        }
+
+        if (p.x < 125) {
+            playSound('crash');
+            lives--;
+            updateHUD();
+            st.popups.push({ x: 165, y: py, text: "UNSERVED HOSER!", timer: 32 });
+            st.patrons.splice(i, 1);
+            if (lives <= 0) {
+                endGame();
+                return;
+            }
+        }
+    }
+
+    for (let i = st.popups.length - 1; i >= 0; i--) {
+        const pop = st.popups[i];
+        pop.y -= 0.7;
+        pop.timer--;
+        ctx.fillStyle = pop.text.includes('150') ? '#fde047' : '#fca5a5';
+        ctx.font = 'bold 12px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(pop.text, pop.x, pop.y);
+        if (pop.timer <= 0) st.popups.splice(i, 1);
+    }
+}
+
+/***********************************************************************
+ * GAME 4: FLAPPY GOOSE
+ ***********************************************************************/
+let flappyState = {
+    y: 200,
+    vy: 0,
+    gravity: 0.35,
+    jump: -6.5,
+    pipes: [],
+    speed: 3.5,
+    wingPhase: 0,
+    bgOffset: 0
+};
+
+function initFlappyGame() {
+    flappyState.y = 200;
+    flappyState.vy = 0;
+    flappyState.pipes = [];
+    flappyState.wingPhase = 0;
+    flappyState.bgOffset = 0;
+}
+
+function handleFlappyDeath() {
+    playSound('crash');
+    lives--;
+    updateHUD();
+    if (lives <= 0) {
+        endGame();
+    } else {
+        // Reset the goose but let them keep their score
+        flappyState.y = 200;
+        flappyState.vy = 0;
+        flappyState.pipes = [];
+    }
+}
+
+function updateAndDrawFlappy() {
+    const st = flappyState;
+
+    // Apply gravity
+    st.vy += st.gravity;
+    st.y += st.vy;
+    st.wingPhase += 0.3;
+
+    // Hit Floor or Ceiling
+    if (st.y > canvas.height - 15 || st.y < 0) {
+        handleFlappyDeath();
+        return;
+    }
+
+    // Spawn Peace Tower Pipes
+    if (frameCount % 110 === 0) {
+        const gap = 150;
+        const minHeight = 50;
+        const maxTop = canvas.height - gap - minHeight;
+        const topHeight = minHeight + Math.random() * (maxTop - minHeight);
+        st.pipes.push({
+            x: canvas.width,
+            topHeight: topHeight,
+            bottomY: topHeight + gap,
+            passed: false
+        });
+    }
+
+    // Draw Sky Background
+    ctx.fillStyle = '#e0f2fe';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Scroll and Draw Parliament Silhouette Background
+    st.bgOffset = (st.bgOffset + 0.5) % 300;
+    ctx.fillStyle = '#cbd5e1';
+    for (let i = -1; i < canvas.width / 300 + 1; i++) {
+        const px = i * 300 - st.bgOffset;
+        ctx.beginPath();
+        ctx.moveTo(px, canvas.height);
+        ctx.lineTo(px, canvas.height - 80);
+        ctx.lineTo(px + 40, canvas.height - 140);
+        ctx.lineTo(px + 80, canvas.height - 80);
+        ctx.lineTo(px + 120, canvas.height - 80);
+        ctx.lineTo(px + 120, canvas.height - 100);
+        ctx.lineTo(px + 150, canvas.height - 100);
+        ctx.lineTo(px + 150, canvas.height);
+        ctx.fill();
+    }
+
+    // Update and Draw Pipes
+    for (let i = st.pipes.length - 1; i >= 0; i--) {
+        const p = st.pipes[i];
+        p.x -= st.speed;
+
+        // Score logic
+        if (!p.passed && p.x + 60 < 100) {
+            p.passed = true;
+            score += 10;
+            updateHUD();
+            playSound('pickup');
+        }
+
+        // Collision logic (Player Goose X is fixed around 100)
+        const gooseBox = { x: 80, y: st.y - 12, w: 36, h: 24 }; 
+        const topPipeBox = { x: p.x, y: 0, w: 60, h: p.topHeight };
+        const botPipeBox = { x: p.x, y: p.bottomY, w: 60, h: canvas.height - p.bottomY };
+
+        if (
+            (gooseBox.x < topPipeBox.x + topPipeBox.w && gooseBox.x + gooseBox.w > topPipeBox.x && gooseBox.y < topPipeBox.y + topPipeBox.h && gooseBox.y + gooseBox.h > topPipeBox.y) ||
+            (gooseBox.x < botPipeBox.x + botPipeBox.w && gooseBox.x + gooseBox.w > botPipeBox.x && gooseBox.y < botPipeBox.y + botPipeBox.h && gooseBox.y + gooseBox.h > botPipeBox.y)
+        ) {
+            handleFlappyDeath();
+            return;
+        }
+
+        // Draw Inverted Top Pipe
+        drawPeaceTowerPipe(p.x, 0, 60, p.topHeight, true);
+        // Draw Bottom Pipe
+        drawPeaceTowerPipe(p.x, p.bottomY, 60, canvas.height - p.bottomY, false);
+
+        if (p.x < -60) {
+            st.pipes.splice(i, 1);
+        }
+    }
+
+    // Draw the Player Goose
+    drawCanadaGoose(100, st.y, st.wingPhase);
+}
+
+function drawPeaceTowerPipe(x, y, w, h, inverted) {
+    // Stone column
+    ctx.fillStyle = '#94a3b8';
+    ctx.fillRect(x, y, w, h);
+
+    // Column edges
+    ctx.fillStyle = '#64748b';
+    ctx.fillRect(x, y, w, 4);
+    ctx.fillRect(x, y + h - 4, w, 4);
+    ctx.fillRect(x + w / 2 - 2, y, 4, h); 
+
+    // Copper Patina Accents
+    ctx.fillStyle = '#14b8a6';
+    if (inverted) {
+        ctx.fillRect(x - 4, y + h - 20, w + 8, 20);
+    } else {
+        ctx.fillRect(x - 4, y, w + 8, 20);
+        // Clock face on the bottom towers
+        if (h > 60) {
+            ctx.fillStyle = '#fef08a';
+            ctx.beginPath();
+            ctx.arc(x + w / 2, y + 40, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#000';
+            ctx.beginPath();
+            ctx.arc(x + w / 2, y + 40, 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+}
+
+function drawStaticPreview() {
+    ctx.fillStyle = '#0f172a';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#AF3C43';
+    ctx.fillRect(0, 0, canvas.width, 12);
+    ctx.fillRect(0, canvas.height - 12, canvas.width, 12);
+}
+
+function resetToDashboard() {
+    isPlaying = false;
+    switchGame('pothole');
+}
+
+/***********************************************************************
+ * 5. OFFICIAL GOVERNMENT HUMOR MODALS
+ ***********************************************************************/
+function showOfficialModal(topic) {
+    playSound('blip');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    const notices = {
+        cheat: {
+            enT: "Access to Cheat Codes Act (R.S.C., 1985, c. U-2)",
+            frT: "Loi sur l'accès aux codes de triche (L.R.C. (1985), ch. U-2)",
+            enB: "Every Canadian citizen or permanent resident has the statutory right to request ↑ ↑ ↓ ↓ ← → ← → B A from the Information Commissioner. Requests must be accompanied by a medium Double-Double.",
+            frB: "Tout citoyen canadien a le droit statutaire de demander ↑ ↑ ↓ ↓ ← → ← → B A au Commissaire à l'information. Toute demande doit être accompagnée d'un café deux-deux moyen."
+        },
+        subsidy: {
+            enT: "Order-in-Council PC-2026-0500: Pixel Stimulus Granted",
+            frT: "Décret C.P. 2026-0500 : Subvention de pixels accordée",
+            enB: "Congratulations! 500 Canadian Heritage points have been credited directly to your active arcade score and registered in the National Registry of High Scores.",
+            frB: "Félicitations! 500 points du Patrimoine canadien ont été crédités directement à votre score actif et inscrits au Registre national."
+        },
+        problem: {
+            enT: "Report a Pothole or Aggressive Goose Incident",
+            frT: "Signaler un nid-de-poule ou un incident de bernache",
+            enB: "Thank you for your civic vigilance. Municipal snowplows and Certified Bagel Negotiators have been dispatched to your coordinates. Estimated arrival: Shortly after hockey season.",
+            frB: "Merci de votre vigilance civique. Des déneigeuses municipales et des négociateurs en bagels ont été dépêchés. Arrivée prévue : peu après les séries éliminatoires."
+        },
+        default: {
+            enT: "Official Crown Copyright & Heritage Notice",
+            frT: "Avis officiel du droit d'auteur de la Couronne",
+            enB: "© His Majesty the King in Right of Canada, represented by the Minister of Canadian Heritage & Pixel Arts, 2026. All 8-bit honks and maple syrup physics are protected under Crown Copyright.",
+            frB: "© Sa Majesté le Roi du chef du Canada, représenté par le ministre du Patrimoine canadien et des Arts pixelisés, 2026. Tous les klaxons 8 bits sont protégés."
+        }
+    };
+
+    const item = notices[topic] || notices.default;
+    modalTitle.textContent = currentLang === 'en' ? item.enT : item.frT;
+    modalContent.innerHTML = `<p class="leading-relaxed">${currentLang === 'en' ? item.enB : item.frB}</p>`;
+    document.getElementById('gcModal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('gcModal').classList.add('hidden');
+    playSound('blip');
+}
+
+function handleSearch(e) {
+    e.preventDefault();
+    const q = document.getElementById('gcSearchInput').value.toLowerCase();
+    if (q.includes('goose') || q.includes('cobra') || q.includes('bernache')) {
+        switchGame('goose');
+    } else if (q.includes('syrup') || q.includes('maple') || q.includes('sirop') || q.includes('tapper')) {
+        switchGame('tapper');
+    } else if (q.includes('pothole') || q.includes('plow') || q.includes('nid')) {
+        switchGame('pothole');
+    } else {
+        showOfficialModal('cheat');
+    }
+}
+
+window.onload = function () {
+    renderLeaderboard();
+    syncCabinetTexts();
+    drawStaticPreview();
+};
