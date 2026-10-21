@@ -33,10 +33,10 @@ const i18n = {
         insertLoonie: "INSERT LOONIE (START GAME)",
         playAgainBtn: "INSERT ANOTHER LOONIE (PLAY AGAIN)",
         actionBtn: "ACTION / SPACE",
-        controlsHintPothole: "WASD or Arrow Keys to steer | Space to honk horn",
+        controlsHintPothole: "Keyboard: [←/→ or A/D] Steer Snowplow | [SPACE] Honk Plow Horn",
         controlsHintGoose: "Keyboard: [←/→ or A/D] Move Picnic Defender | [SPACE or ↑] Toss Fresh Bagel",
         controlsHintTapper: "Keyboard: [↑/↓ or W/S] Switch Snowy Counter | [SPACE or →] Slide Maple Syrup Jug",
-        controlsHintFlappy: "WASD, Arrow Keys, Space, or Click to flap your wings",
+        controlsHintFlappy: "Keyboard: [SPACE or ↑] Flap Wings to fly between Peace Towers",
         leaderboardTitle: "National Registry of High Scores",
         leaderboardSub: "Certified by the Auditor General of Canada",
         citizenIdLabel: "Your Citizen Handle:",
@@ -91,10 +91,10 @@ const i18n = {
         insertLoonie: "INSÉRER UN HUARD (DÉMARRER)",
         playAgainBtn: "INSÉRER UN AUTRE HUARD (REJOUER)",
         actionBtn: "ACTION / ESPACE",
-        controlsHintPothole: "Clés WASD ou Flèches pour diriger | Espace pour klaxonner",
+        controlsHintPothole: "Clavier : [←/→ ou A/D] Diriger la déneigeuse | [ESPACE] Klaxonner",
         controlsHintGoose: "Clavier : [←/→ ou A/D] Déplacer | [ESPACE ou ↑] Lancer un bagel",
         controlsHintTapper: "Clavier : [↑/↓ ou W/S] Changer de comptoir | [ESPACE ou →] Glisser une cruche",
-        controlsHintFlappy: "WASD, Flèches, Espace, ou Cliquez pour battre des ailes",
+        controlsHintFlappy: "Clavier : [ESPACE ou ↑] Battez des ailes pour voler",
         leaderboardTitle: "Registre national des meilleurs scores",
         leaderboardSub: "Certifié par le Bureau du vérificateur général",
         citizenIdLabel: "Identifiant citoyen :",
@@ -125,6 +125,7 @@ const gameMetadata = {
         enTitle: "Trans-Canada Snowplower",
         frTitle: "Patrouille Nids-de-poule : Édition Transcanadienne",
         enOverlayTitle: "TRANS-CANADA SNOWPLOWER",
+        frOverlayTitle: "PATROUILLE NIDS-DE-POULE",
         enDesc: "Steer your snowplow with Right/Left Arrows or A/D. Dodge potholes & cones! Collect Timbits (+50) and Double-Doubles (+100).",
         frDesc: "Dirigez votre chasse-neige avec GAUCHE/DROITE (ou A/D). Évitez les nids-de-poule et les cônes! Ramassez les Timbits (+50) et cafés (+100)."
     },
@@ -559,9 +560,9 @@ function syncCabinetTexts() {
 
     const hintEl = document.getElementById('controlsHelpBar').querySelector('span');
     if (activeGameKey === 'pothole') hintEl.textContent = i18n[currentLang].controlsHintPothole;
-    if (activeGameKey === 'goose') hintEl.textContent = i18n[currentLang].controlsHintGoose;
-    if (activeGameKey === 'tapper') hintEl.textContent = i18n[currentLang].controlsHintTapper;
-    if (activeGameKey === 'flappy') hintEl.textContent = i18n[currentLang].controlsHintFlappy;
+    else if (activeGameKey === 'goose') hintEl.textContent = i18n[currentLang].controlsHintGoose;
+    else if (activeGameKey === 'tapper') hintEl.textContent = i18n[currentLang].controlsHintTapper;
+    else if (activeGameKey === 'flappy') hintEl.textContent = i18n[currentLang].controlsHintFlappy;
 }
 
 function updateHUD() {
@@ -572,7 +573,10 @@ function updateHUD() {
 function startCurrentGame() {
     playSound('coin');
     score = 0;
-    lives = 3;
+    
+    // Insta-death for Flappy Goose (1 life only)
+    lives = (activeGameKey === 'flappy') ? 1 : 3;
+    
     frameCount = 0;
     isPlaying = true;
     updateHUD();
@@ -1154,11 +1158,6 @@ function handleFlappyDeath() {
     updateHUD();
     if (lives <= 0) {
         endGame();
-    } else {
-        // Reset the goose but let them keep their score
-        flappyState.y = 200;
-        flappyState.vy = 0;
-        flappyState.pipes = [];
     }
 }
 
@@ -1252,23 +1251,19 @@ function updateAndDrawFlappy() {
 }
 
 function drawPeaceTowerPipe(x, y, w, h, inverted) {
-    // Stone column
     ctx.fillStyle = '#94a3b8';
     ctx.fillRect(x, y, w, h);
 
-    // Column edges
     ctx.fillStyle = '#64748b';
     ctx.fillRect(x, y, w, 4);
     ctx.fillRect(x, y + h - 4, w, 4);
     ctx.fillRect(x + w / 2 - 2, y, 4, h); 
 
-    // Copper Patina Accents
     ctx.fillStyle = '#14b8a6';
     if (inverted) {
         ctx.fillRect(x - 4, y + h - 20, w + 8, 20);
     } else {
         ctx.fillRect(x - 4, y, w + 8, 20);
-        // Clock face on the bottom towers
         if (h > 60) {
             ctx.fillStyle = '#fef08a';
             ctx.beginPath();
