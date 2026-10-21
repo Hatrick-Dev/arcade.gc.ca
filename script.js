@@ -25,7 +25,7 @@ const i18n = {
         game3Desc: "Distrbute maple syrup jugs to thirsty Lumberjacks, Mounties, and hockey players.",
         formCode3: "",
         game4Title: "4. Flappy Goose",
-        game4Desc: "Navigate the capital's airspace! Flap your wings to fly between the Peace Towers without crashing.",
+        game4Desc: "Fly over Parliament Hill and don't hit the pillars! Press Up Arrow or Space to go up.",
         formCode4: "",
         playNowText: "Launch Simulator",
         scoreHeader: "SCORE:",
