@@ -33,7 +33,7 @@ const i18n = {
         insertLoonie: "INSERT LOONIE (START GAME)",
         playAgainBtn: "INSERT ANOTHER LOONIE (PLAY AGAIN)",
         actionBtn: "ACTION / SPACE",
-        controlsHintPothole: "Keyboard: [←/→ or A/D] Steer Snowplow | [SPACE] Honk Plow Horn",
+        controlsHintPothole: "WASD or Arrow Keys to steer | Space to honk horn",
         controlsHintGoose: "Keyboard: [←/→ or A/D] Move Picnic Defender | [SPACE or ↑] Toss Fresh Bagel",
         controlsHintTapper: "Keyboard: [↑/↓ or W/S] Switch Snowy Counter | [SPACE or →] Slide Maple Syrup Jug",
         controlsHintFlappy: "Keyboard: [SPACE or ↑] Flap Wings to fly between Peace Towers",
@@ -91,7 +91,7 @@ const i18n = {
         insertLoonie: "INSÉRER UN HUARD (DÉMARRER)",
         playAgainBtn: "INSÉRER UN AUTRE HUARD (REJOUER)",
         actionBtn: "ACTION / ESPACE",
-        controlsHintPothole: "Clavier : [←/→ ou A/D] Diriger la déneigeuse | [ESPACE] Klaxonner",
+        controlsHintPothole: "Clés WASD ou Flèches pour diriger | Espace pour klaxonner",
         controlsHintGoose: "Clavier : [←/→ ou A/D] Déplacer | [ESPACE ou ↑] Lancer un bagel",
         controlsHintTapper: "Clavier : [↑/↓ ou W/S] Changer de comptoir | [ESPACE ou →] Glisser une cruche",
         controlsHintFlappy: "Clavier : [ESPACE ou ↑] Battez des ailes pour voler",
@@ -567,7 +567,14 @@ function syncCabinetTexts() {
 
 function updateHUD() {
     document.getElementById('liveScoreDisplay').textContent = score.toLocaleString();
-    document.getElementById('liveStatusDisplay').textContent = '🍁'.repeat(Math.max(0, lives)) + '🖤'.repeat(Math.max(0, 3 - lives));
+    
+    // For Flappy Goose, only show remaining lives without empty hearts.
+    // For all other games, show up to 3 total spots (🍁 = alive, 🖤 = dead)
+    if (activeGameKey === 'flappy') {
+        document.getElementById('liveStatusDisplay').textContent = '🍁'.repeat(Math.max(0, lives));
+    } else {
+        document.getElementById('liveStatusDisplay').textContent = '🍁'.repeat(Math.max(0, lives)) + '🖤'.repeat(Math.max(0, 3 - lives));
+    }
 }
 
 function startCurrentGame() {
@@ -1193,21 +1200,54 @@ function updateAndDrawFlappy() {
     ctx.fillStyle = '#e0f2fe';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Scroll and Draw Parliament Silhouette Background
-    st.bgOffset = (st.bgOffset + 0.5) % 300;
-    ctx.fillStyle = '#cbd5e1';
-    for (let i = -1; i < canvas.width / 300 + 1; i++) {
-        const px = i * 300 - st.bgOffset;
+    // Detailed Parliament Silhouette Background (Repeating every 400px)
+    st.bgOffset = (st.bgOffset + 0.5) % 400;
+    ctx.fillStyle = '#cbd5e1'; 
+    for (let i = -1; i < canvas.width / 400 + 1; i++) {
+        const px = i * 400 - st.bgOffset;
+        const baseY = canvas.height;
+
         ctx.beginPath();
-        ctx.moveTo(px, canvas.height);
-        ctx.lineTo(px, canvas.height - 80);
-        ctx.lineTo(px + 40, canvas.height - 140);
-        ctx.lineTo(px + 80, canvas.height - 80);
-        ctx.lineTo(px + 120, canvas.height - 80);
-        ctx.lineTo(px + 120, canvas.height - 100);
-        ctx.lineTo(px + 150, canvas.height - 100);
-        ctx.lineTo(px + 150, canvas.height);
+        ctx.moveTo(px, baseY);
+        
+        // Left building wing with slanted roof
+        ctx.lineTo(px, baseY - 80);
+        ctx.lineTo(px + 10, baseY - 120);
+        ctx.lineTo(px + 40, baseY - 120);
+        ctx.lineTo(px + 50, baseY - 140); // small spire
+        ctx.lineTo(px + 60, baseY - 120);
+        ctx.lineTo(px + 130, baseY - 120);
+        ctx.lineTo(px + 150, baseY - 80);
+        
+        // Center Peace Tower
+        ctx.lineTo(px + 150, baseY - 160);
+        ctx.lineTo(px + 160, baseY - 160);
+        ctx.lineTo(px + 160, baseY - 280); 
+        ctx.lineTo(px + 155, baseY - 280); 
+        ctx.lineTo(px + 175, baseY - 360); // Peak of tower
+        ctx.lineTo(px + 195, baseY - 280); 
+        ctx.lineTo(px + 190, baseY - 280);
+        ctx.lineTo(px + 190, baseY - 160);
+        ctx.lineTo(px + 200, baseY - 160);
+        
+        // Right building wing
+        ctx.lineTo(px + 200, baseY - 80);
+        ctx.lineTo(px + 220, baseY - 120);
+        ctx.lineTo(px + 290, baseY - 120);
+        ctx.lineTo(px + 300, baseY - 140); // small spire
+        ctx.lineTo(px + 310, baseY - 120);
+        ctx.lineTo(px + 340, baseY - 120);
+        ctx.lineTo(px + 350, baseY - 80);
+        ctx.lineTo(px + 400, baseY - 80);
+        ctx.lineTo(px + 400, baseY);
         ctx.fill();
+
+        // Simple Clock Face on the background Peace Tower
+        ctx.fillStyle = '#fef08a';
+        ctx.beginPath();
+        ctx.arc(px + 175, baseY - 250, 10, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#cbd5e1'; 
     }
 
     // Update and Draw Pipes
@@ -1223,7 +1263,7 @@ function updateAndDrawFlappy() {
             playSound('pickup');
         }
 
-        // Collision logic (Player Goose X is fixed around 100)
+        // Collision logic
         const gooseBox = { x: 80, y: st.y - 12, w: 36, h: 24 }; 
         const topPipeBox = { x: p.x, y: 0, w: 60, h: p.topHeight };
         const botPipeBox = { x: p.x, y: p.bottomY, w: 60, h: canvas.height - p.bottomY };
