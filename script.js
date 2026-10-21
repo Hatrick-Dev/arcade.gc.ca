@@ -153,7 +153,7 @@ const gameMetadata = {
         frTitle: "Flappy Goose",
         enOverlayTitle: "FLAPPY GOOSE",
         frOverlayTitle: "FLAPPY GOOSE",
-        enDesc: "Navigate the capital's airspace! Flap your wings to fly between the Peace Towers without crashing.",
+        enDesc: "Fly over Parliament Hill and don't hit the pillars! Press Up Arrow or Space to go up.",
         frDesc: "Naviguez dans l'espace aérien de la capitale! Battez des ailes pour voler entre les Tours de la Paix sans vous écraser."
     }
 };
