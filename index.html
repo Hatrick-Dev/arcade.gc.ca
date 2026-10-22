@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>arcade.gc.ca</title>
+    <title>Arcade.gc.ca - NOT OFFICIAL</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Lato & Noto Sans + Press Start 2P for Arcade Canvas -->
@@ -34,10 +34,10 @@
                     </div>
                 </a>
 
-                <!-- Right Controls: Audio Synthesizer Toggle & Language Toggle -->
+                <!-- Right Controls: Audio Synthesizer Toggle -->
                 <div class="flex items-center space-x-3 sm:space-x-5 ml-auto">
                     <!-- Retro Sound Toggle -->
-                    <button id="soundToggleBtn" onclick="toggleSound()" class="flex items-center space-x-2 text-xs sm:text-sm px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 text-[#284162] font-semibold transition">
+                    <button id="soundToggleBtn" onclick="toggleSound()" class="flex items-center space-x-2 text-xs sm:text-sm px-3 py-1.5 rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 text-[#284162] font-semibold transition cursor-pointer">
                         <i id="soundIcon" class="fa-solid fa-volume-high text-[#AF3C43]"></i>
                         <span id="soundLabel" data-i18n="soundOn">Audio: ON</span>
                     </button>
@@ -46,10 +46,9 @@
 
             <!-- Middle Row: Search Bar -->
             <div class="pt-3 border-t border-gray-200 flex justify-end">
-                <!-- Search Arcade.gc.ca Mock Bar -->
                 <form onsubmit="handleSearch(event)" class="flex w-full md:w-80">
                     <input type="text" id="gcSearchInput" placeholder="Search Arcade.gc.ca" class="w-full px-3 py-1.5 text-sm border border-gray-400 rounded-l focus:outline-none focus:ring-2 focus:ring-[#26374A]" />
-                    <button type="submit" class="bg-[#26374A] hover:bg-[#1c2938] text-white px-4 py-1.5 rounded-r transition" aria-label="Search">
+                    <button type="submit" class="bg-[#26374A] hover:bg-[#1c2938] text-white px-4 py-1.5 rounded-r transition cursor-pointer" aria-label="Search">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
@@ -139,7 +138,7 @@
                         </div>
                         <h3 class="text-base font-bold text-[#284162] underline mb-2" data-i18n="game4Title">4. Flappy Goose</h3>
                         <p class="text-xs text-gray-700 mb-3" data-i18n="game4Desc">
-                            Navigate the capital's airspace! Flap your wings to fly between the Peace Towers without crashing.
+                            Fly over Parliament Hill and don't hit the pillars! Press Up Arrow or Space to go up.
                         </p>
                     </div>
                     <div class="pt-2 border-t border-gray-200 flex items-center justify-between text-xs font-semibold text-gray-600">
@@ -150,14 +149,15 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE ARCADE CABINET -->
-        <!-- Fix: Removed grid to allow the cabinet to center and fully display the bottom controls -->
-        <section id="arcade-cabinet" class="max-w-4xl mx-auto items-start mb-8">
-            <div class="bg-[#1e293b] border-4 border-[#26374A] rounded-lg shadow-xl overflow-hidden">
+        <!-- INTERACTIVE ARCADE CABINET (LEFT 8 COLS) & OGR RADIO PLAYER (RIGHT 4 COLS) -->
+        <section id="arcade-cabinet" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
+            
+            <!-- LEFT 8 COLS: THE HTML5 ARCADE CABINET -->
+            <div class="lg:col-span-8 bg-[#1e293b] border-4 border-[#26374A] rounded-lg shadow-xl overflow-hidden">
                 <!-- Cabinet Marquee Header -->
                 <div class="bg-[#AF3C43] text-white px-4 py-3 flex flex-wrap justify-between items-center border-b-4 border-yellow-400">
                     <div class="flex items-center space-x-3">
-                        <h3 id="cabinetTitle" class="font-bold text-base sm:text-lg tracking-wide">Pothole Patrol: Trans-Canada Edition</h3>
+                        <h3 id="cabinetTitle" class="font-bold text-base sm:text-lg tracking-wide">Trans-Canada Snowplower</h3>
                     </div>
                     <div class="flex items-center space-x-4 text-xs sm:text-sm font-mono">
                         <div>
@@ -166,7 +166,7 @@
                         </div>
                         <div>
                             <span data-i18n="livesHeader">STATUS:</span> 
-                            <span id="liveStatusDisplay" class="font-bold text-green-300">♥♥♥</span>
+                            <span id="liveStatusDisplay" class="font-bold text-green-300">🍁🍁🍁</span>
                         </div>
                     </div>
                 </div>
@@ -180,9 +180,9 @@
                     <div id="canvasOverlay" class="absolute inset-0 bg-black/80 flex flex-col justify-center items-center text-center p-6 z-10">
                         <div class="border-2 border-[#AF3C43] bg-[#111827]/95 p-6 rounded-lg max-w-md w-full shadow-2xl">
                             <div id="overlayEmoji" class="text-4xl mb-2">🚜🕳️☕</div>
-                            <h4 id="overlayTitle" class="arcade-font text-yellow-400 text-base sm:text-lg mb-3 leading-snug">POTHOLE PATROL</h4>
+                            <h4 id="overlayTitle" class="arcade-font text-yellow-400 text-base sm:text-lg mb-3 leading-snug">TRANS-CANADA SNOWPLOWER</h4>
                             <p id="overlayDesc" class="text-gray-200 text-xs sm:text-sm mb-4 leading-relaxed">
-                                Use arrow keys or WASD to steer. Avoid potholes &amp; cones! Collect Timbits (+50) and Double-Doubles (+100).
+                                Steer your snowplow with Right/Left Arrows or A/D. Dodge potholes &amp; cones! Collect Timbits (+50) and Double-Doubles (+100).
                             </p>
                             <div id="finalScoreBanner" class="hidden bg-red-950/90 border border-red-500 text-red-200 p-3 rounded mb-4 text-xs">
                                 <p class="font-bold text-sm text-yellow-300 mb-1" id="finalScoreText">FINAL SCORE: 0</p>
@@ -195,7 +195,7 @@
                     </div>
                 </div>
 
-                <!-- RESTORED: On-Screen Touch / Mouse Controls & Instructions Footer -->
+                <!-- On-Screen Touch / Mouse Controls & Instructions Footer -->
                 <div class="bg-[#0f172a] text-gray-200 p-3 sm:p-4 border-t border-gray-700 w-full block">
                     <div class="flex flex-wrap items-center justify-between gap-3">
                         <!-- Touch / Click D-Pad -->
@@ -223,22 +223,99 @@
                     </div>
                     <p id="controlsHelpBar" class="text-xs text-gray-400 mt-2.5 font-mono">
                         <i class="fa-regular fa-keyboard mr-1 text-yellow-400"></i>
-                        <span data-i18n="controlsHintPothole">WASD or Arrow Keys to steer | Space to honk horn</span>
+                        <span data-i18n="controlsHintPothole">Keyboard: [←/→ or A/D] Steer Snowplow | [SPACE] Honk Plow Horn</span>
                     </p>
                 </div>
             </div>
+
+            <!-- RIGHT 4 COLS: OGR-SCINTILLA OFFICIAL PARODY RADIO PLAYER -->
+            <div class="lg:col-span-4 flex flex-col space-y-5">
+                <div class="bg-white border-2 border-[#26374A] rounded-lg shadow-lg overflow-hidden">
+                    <!-- Radio Header -->
+                    <div class="bg-[#26374A] text-white px-4 py-3 border-b-4 border-[#AF3C43] flex items-center justify-between">
+                        <div>
+                            <h3 class="font-bold text-base flex items-center gap-2">
+                                <i class="fa-solid fa-radio text-yellow-400"></i>
+                                <span>OGR-Scintilla Radio</span>
+                            </h3>
+                            <p class="text-[11px] text-gray-300">Official Canadian Parody Broadcast</p>
+                        </div>
+                        <span class="text-[10px] font-mono bg-[#AF3C43] text-white px-2 py-0.5 rounded uppercase font-bold">CRTC Approved</span>
+                    </div>
+
+                    <!-- Now Playing Display -->
+                    <div class="p-4 bg-[#0f172a] text-white border-b border-gray-700">
+                        <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 mb-1">
+                            <span id="musicStatusBadge" class="text-yellow-400 font-bold flex items-center gap-1.5">
+                                <i id="musicSpinIcon" class="fa-solid fa-compact-disc"></i>
+                                <span id="musicStatusText">READY TO PLAY</span>
+                            </span>
+                            <span id="musicTimeDisplay">0:00 / 0:00</span>
+                        </div>
+                        <div id="nowPlayingTitle" class="font-bold text-sm sm:text-base text-white truncate mb-1">
+                            Select a track below
+                        </div>
+                        <div class="text-xs text-gray-400 mb-3 flex items-center justify-between">
+                            <span>Artist: <strong class="text-gray-200">OGR-Scintilla</strong></span>
+                            <a href="https://www.overgrowthrenaissance.com/music" target="_blank" rel="noopener noreferrer" class="text-yellow-400 hover:underline text-[11px] flex items-center gap-1">
+                                Official Site <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+                            </a>
+                        </div>
+
+                        <!-- Interactive Seek Bar -->
+                        <input type="range" id="musicSeekBar" value="0" min="0" max="100" step="0.1" oninput="seekMusic(this.value)" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#AF3C43] mb-3" />
+
+                        <!-- Playback Controls & Volume -->
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center space-x-2">
+                                <button onclick="prevTrack()" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded flex items-center justify-center border border-gray-600 transition cursor-pointer" title="Previous Track">
+                                    <i class="fa-solid fa-backward-step text-xs"></i>
+                                </button>
+                                <button onclick="togglePlayMusic()" id="musicPlayBtn" class="bg-[#AF3C43] hover:bg-red-700 text-white w-11 h-9 rounded flex items-center justify-center shadow border-b-2 border-red-950 transition cursor-pointer" title="Play / Pause">
+                                    <i id="musicPlayIcon" class="fa-solid fa-play text-sm"></i>
+                                </button>
+                                <button onclick="nextTrack()" class="bg-gray-800 hover:bg-gray-700 text-white w-9 h-9 rounded flex items-center justify-center border border-gray-600 transition cursor-pointer" title="Next Track">
+                                    <i class="fa-solid fa-forward-step text-xs"></i>
+                                </button>
+                            </div>
+
+                            <!-- Volume Control -->
+                            <div class="flex items-center space-x-2 w-28">
+                                <i class="fa-solid fa-volume-low text-gray-400 text-xs"></i>
+                                <input type="range" id="musicVolumeSlider" min="0" max="1" step="0.05" value="0.8" oninput="changeMusicVolume(this.value)" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-yellow-400" title="Music Volume" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Scrollable Playlist Container (Fits all 7 songs cleanly) -->
+                    <div class="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center justify-between text-xs font-bold text-[#26374A]">
+                        <span>AVAILABLE TRACKS</span>
+                        <span id="trackCountBadge" class="font-mono text-[11px] bg-gray-200 px-2 py-0.5 rounded">7 Songs</span>
+                    </div>
+                    <div id="playlistContainer" class="divide-y divide-gray-200 max-h-80 overflow-y-auto bg-white">
+                        <!-- Populated dynamically by script.js -->
+                    </div>
+
+                    <!-- Footer Credit -->
+                    <div class="bg-gray-100 px-4 py-2.5 text-[11px] text-gray-600 border-t border-gray-200 flex items-center justify-between">
+                        <span>Used with permission from OGR-Scintilla</span>
+                        <i class="fa-solid fa-music text-[#AF3C43]"></i>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- PAGE DETAILS / REPORT A PROBLEM / DATE MODIFIED -->
         <div class="mt-8 pt-6 border-t border-gray-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-sm">
             <div class="flex flex-wrap gap-3">
-                <button onclick="showOfficialModal('problem')" class="bg-[#eaebed] hover:bg-[#cfd1d5] text-gray-800 font-semibold px-4 py-2 rounded border border-gray-300 transition" data-i18n="reportProblemBtn">
+                <button onclick="showOfficialModal('problem')" class="bg-[#eaebed] hover:bg-[#cfd1d5] text-gray-800 font-semibold px-4 py-2 rounded border border-gray-300 transition cursor-pointer" data-i18n="reportProblemBtn">
                     Feedback
                 </button>
             </div>
             <dl class="text-xs text-gray-600">
                 <dt class="inline font-semibold" data-i18n="dateModifiedLabel">Date modified:</dt>
-                <dd class="inline font-mono">2026-10-17</dd>
+                <dd class="inline font-mono">2026-10-21</dd>
             </dl>
         </div>
 
@@ -267,7 +344,6 @@
                 <div class="flex items-end select-none ml-auto sm:ml-0 mt-2">
                     <div class="relative inline-block pr-6">
                         <span class="text-3xl sm:text-4xl font-bold text-black" style="font-family: Baskerville, 'Baskerville Old Face', 'Hoefler Text', Garamond, 'Times New Roman', serif; letter-spacing: -0.05em;">Canada</span>
-                        <!-- Perfect Little Flag for the Logo via Wikimedia Commons -->
                         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Canada_%28Pantone%29.svg" class="w-8 h-4 absolute -top-1.5 -right-1 shadow-sm border border-gray-200 object-cover" alt="Flag">
                     </div>
                 </div>
@@ -280,13 +356,13 @@
         <div class="bg-white border-t-8 border-[#AF3C43] rounded shadow-2xl max-w-lg w-full overflow-hidden">
             <div class="px-6 py-4 bg-gray-100 border-b border-gray-300 flex justify-between items-center">
                 <h3 id="modalTitle" class="font-bold text-lg text-[#26374A]">Official Notice</h3>
-                <button onclick="closeModal()" class="text-gray-600 hover:text-black text-xl font-bold">&times;</button>
+                <button onclick="closeModal()" class="text-gray-600 hover:text-black text-xl font-bold cursor-pointer">&times;</button>
             </div>
             <div id="modalContent" class="p-6 text-sm text-gray-800 space-y-3">
                 <!-- Dynamic Modal Content -->
             </div>
             <div class="px-6 py-3 bg-gray-100 border-t border-gray-300 flex justify-end">
-                <button onclick="closeModal()" class="bg-[#26374A] hover:bg-[#1c2938] text-white font-semibold px-5 py-2 rounded text-sm" data-i18n="closeBtn">
+                <button onclick="closeModal()" class="bg-[#26374A] hover:bg-[#1c2938] text-white font-semibold px-5 py-2 rounded text-sm cursor-pointer" data-i18n="closeBtn">
                     Acknowledge &amp; Close
                 </button>
             </div>
