@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arcade.gc.ca - NOT OFFICIAL</title>
+    <title>arcade.gc.ca</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Lato & Noto Sans + Press Start 2P for Arcade Canvas -->
@@ -286,12 +286,12 @@
                         </div>
                     </div>
 
-                    <!-- Scrollable Playlist Container (Fits all 7 songs cleanly) -->
+                    <!-- Scrollable Playlist Container (FIXED MIN-HEIGHT) -->
                     <div class="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center justify-between text-xs font-bold text-[#26374A]">
                         <span>AVAILABLE TRACKS</span>
                         <span id="trackCountBadge" class="font-mono text-[11px] bg-gray-200 px-2 py-0.5 rounded">7 Songs</span>
                     </div>
-                    <div id="playlistContainer" class="divide-y divide-gray-200 max-h-80 overflow-y-auto bg-white">
+                    <div id="playlistContainer" class="divide-y divide-gray-200 min-h-[160px] max-h-80 overflow-y-auto bg-white block w-full">
                         <!-- Populated dynamically by script.js -->
                     </div>
 
