@@ -1,3 +1,20 @@
+/***********************************************************************
+ * 1. EDIT YOUR 7 OGR-SCINTILLA SONGS RIGHT HERE!
+ * Put the song title in "title" and the folder/filename in "file"
+ ***********************************************************************/
+const ogrPlaylist = [
+    { title: "Canadian Jolene Remix", file: "OGR-Scintilla - Jolene Canadian Remix.mp3" },
+    { title: "Young Poutine", file: "OGR-Scintilla - Mr.mp3" },
+    { title: "Not Like U.S.", file: "OGR-Scintilla - Not like U.S.mp3" },
+    { title: "Flow Like Trudeau", file: "OGR-Scintilla - Flow Like Trudeau.mp3" },
+    { title: "Canadian Boys", file: "OGR-Scintilla - Canadian Boys.mp3" },
+    { title: "Party in Canada", file: "OGR-Scintilla - Party in Canada.mp3" },
+    { title: "Slapshot", file: "OGR-Scintilla Slapshot (Bazooka).mp3" }
+];
+
+/***********************************************************************
+ * 2. BILINGUAL TRANSLATION DICTIONARY
+ ***********************************************************************/
 let currentLang = 'en';
 
 const i18n = {
@@ -33,30 +50,14 @@ const i18n = {
         insertLoonie: "INSERT LOONIE (START GAME)",
         playAgainBtn: "INSERT ANOTHER LOONIE (PLAY AGAIN)",
         actionBtn: "ACTION / SPACE",
-        controlsHintPothole: "WASD or Arrow Keys to steer | Space to honk horn",
+        controlsHintPothole: "Keyboard: [←/→ or A/D] Steer Snowplow | [SPACE] Honk Plow Horn",
         controlsHintGoose: "Keyboard: [←/→ or A/D] Move Picnic Defender | [SPACE or ↑] Toss Fresh Bagel",
         controlsHintTapper: "Keyboard: [↑/↓ or W/S] Switch Snowy Counter | [SPACE or →] Slide Maple Syrup Jug",
         controlsHintFlappy: "Keyboard: [SPACE or ↑] Flap Wings to fly between Peace Towers",
-        leaderboardTitle: "National Registry of High Scores",
-        leaderboardSub: "Certified by the Auditor General of Canada",
-        citizenIdLabel: "Your Citizen Handle:",
-        registryFootnote: "Updated automatically as you play",
-        resetRegistry: "Reset",
-        didYouKnowTitle: "Statutory Gaming Guidelines",
-        didYouKnowBody: "Under Section 12 of the Access to Cheat Codes Act, citizens experiencing winter road fatigue or goose intimidation may claim an immediate high-score stimulus credit.",
-        claimSubsidyBtn: "Claim 500-Pt Cultural Pixel Subsidy",
         reportProblemBtn: "Feedback",
         dateModifiedLabel: "Date modified:",
         footerHeader: "Made by Hatrick-Dev",
-        footerLink1: "Access to Cheat Codes Act",
-        footerLink2: "Strategic Maple Syrup Reserve Audits",
-        footerLink3: "Cobra Chicken Peace Treaty (1997)",
-        footerLink4: "National Pothole Classification Standards",
-        footerLink6: "Official Languages & 8-Bit Sound Effects Act",
         subFooter1: "Social media",
-        subFooter2: "Access to Cheat Codes Act",
-        subFooter3: "Terms & Conditions",
-        subFooter4: "Crown Copyright",
         closeBtn: "Acknowledge & Close"
     },
     fr: {
@@ -83,7 +84,7 @@ const i18n = {
         game3Desc: "Remplissez des cruches de sirop d'érable aux chalumeaux et faites-les glisser sur des comptoirs enneigés vers les bûcherons et la GRC assoiffés!",
         formCode3: "",
         game4Title: "4. Flappy Goose",
-        game4Desc: "Naviguez dans l'espace aérien de la capitale! Battez des ailes pour voler entre les Tours de la Paix sans vous écraser.",
+        game4Desc: "Survolez la Colline du Parlement sans frapper les piliers! Appuyez sur Espace ou Haut pour monter.",
         formCode4: "",
         playNowText: "Lancer le simulateur",
         scoreHeader: "POINTAGE :",
@@ -91,30 +92,14 @@ const i18n = {
         insertLoonie: "INSÉRER UN HUARD (DÉMARRER)",
         playAgainBtn: "INSÉRER UN AUTRE HUARD (REJOUER)",
         actionBtn: "ACTION / ESPACE",
-        controlsHintPothole: "Clés WASD ou Flèches pour diriger | Espace pour klaxonner",
+        controlsHintPothole: "Clavier : [←/→ ou A/D] Diriger la déneigeuse | [ESPACE] Klaxonner",
         controlsHintGoose: "Clavier : [←/→ ou A/D] Déplacer | [ESPACE ou ↑] Lancer un bagel",
         controlsHintTapper: "Clavier : [↑/↓ ou W/S] Changer de comptoir | [ESPACE ou →] Glisser une cruche",
         controlsHintFlappy: "Clavier : [ESPACE ou ↑] Battez des ailes pour voler",
-        leaderboardTitle: "Registre national des meilleurs scores",
-        leaderboardSub: "Certifié par le Bureau du vérificateur général",
-        citizenIdLabel: "Identifiant citoyen :",
-        registryFootnote: "Mis à jour en direct pendant que vous jouez",
-        resetRegistry: "Réinitialiser",
-        didYouKnowTitle: "Lignes directrices statutaires",
-        didYouKnowBody: "En vertu de l'article 12 de la Loi sur l'accès aux codes de triche, les citoyens confrontés aux bernaches peuvent réclamer une subvention immédiate de 500 points.",
-        claimSubsidyBtn: "Réclamer la subvention de 500 pts",
         reportProblemBtn: "Commentaires",
         dateModifiedLabel: "Date de modification :",
         footerHeader: "Fait par Hatrick-Dev",
-        footerLink1: "Loi sur l'accès aux codes de triche",
-        footerLink2: "Vérifications de la réserve stratégique de sirop d'érable",
-        footerLink3: "Traité de paix des Poulets Cobras (1997)",
-        footerLink4: "Normes nationales de classification des nids-de-poule",
-        footerLink6: "Loi sur les langues officielles et effets sonores 8 bits",
         subFooter1: "Médias sociaux",
-        subFooter2: "Loi sur l'accès aux codes de triche",
-        subFooter3: "Avis",
-        subFooter4: "Droit d'auteur de la Couronne",
         closeBtn: "Accuser réception et fermer"
     }
 };
@@ -154,31 +139,12 @@ const gameMetadata = {
         enOverlayTitle: "FLAPPY GOOSE",
         frOverlayTitle: "FLAPPY GOOSE",
         enDesc: "Fly over Parliament Hill and don't hit the pillars! Press Up Arrow or Space to go up.",
-        frDesc: "Naviguez dans l'espace aérien de la capitale! Battez des ailes pour voler entre les Tours de la Paix sans vous écraser."
+        frDesc: "Survolez la Colline du Parlement sans frapper les piliers! Appuyez sur Espace ou Haut pour monter."
     }
 };
 
-function toggleLanguage() {
-    currentLang = currentLang === 'en' ? 'fr' : 'en';
-    document.documentElement.lang = currentLang;
-    document.getElementById('langToggleBtn').textContent = currentLang === 'en' ? 'Français' : 'English';
-    document.getElementById('gcSearchInput').placeholder = i18n[currentLang].searchPlaceholder;
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (i18n[currentLang][key]) {
-            el.textContent = i18n[currentLang][key];
-        }
-    });
-
-    updateSoundUI();
-    syncCabinetTexts();
-    renderLeaderboard();
-    playSound('blip');
-}
-
 /***********************************************************************
- * 2. SYNTHESIZED WEB AUDIO API RETRO SOUND ENGINE
+ * 3. SYNTHESIZED WEB AUDIO API RETRO SOUND ENGINE
  ***********************************************************************/
 let soundEnabled = true;
 let audioCtx = null;
@@ -324,107 +290,159 @@ function playSound(type) {
 }
 
 /***********************************************************************
- * 3. NATIONAL REGISTRY OF HIGH SCORES (LEADERBOARD ENGINE)
+ * 4. OGR-SCINTILLA RADIO / PARODY PLAYLIST ENGINE
  ***********************************************************************/
-const defaultLeaderboard = [
-    { handle: "Gord_TR", province: "ON", game: "Pothole Patrol", score: 14200, isUser: false },
-    { handle: "Celine_QC", province: "QC", game: "Maple Syrup Tapper", score: 12850, isUser: false },
-    { handle: "Terry_BC", province: "BC", game: "Pothole Patrol", score: 11400, isUser: false },
-    { handle: "Wayne_AB", province: "AB", game: "Cobra Chicken Defense", score: 9900, isUser: false },
-    { handle: "Anne_PEI", province: "PE", game: "Maple Syrup Tapper", score: 8450, isUser: false },
-    { handle: "Keanu_MB", province: "MB", game: "Cobra Chicken Defense", score: 7200, isUser: false }
-];
+let currentTrackIndex = 0;
+let isMusicPlaying = false;
+const musicPlayer = new Audio();
+musicPlayer.volume = 0.8;
 
-let leaderboard = JSON.parse(JSON.stringify(defaultLeaderboard));
-let highestUserSessionScore = 0;
+function initMusicPlayer() {
+    const countBadge = document.getElementById('trackCountBadge');
+    if (countBadge) countBadge.textContent = `${ogrPlaylist.length} Songs`;
 
-function renderLeaderboard() {
-    const container = document.getElementById('leaderboardList');
-    if (!container) return; // Prevent freeze when leaderboard HTML is commented out
+    if (ogrPlaylist.length > 0) {
+        loadTrack(0, false);
+    }
+    renderPlaylist();
 
-    leaderboard.sort((a, b) => b.score - a.score);
+    musicPlayer.addEventListener('timeupdate', () => {
+        const seek = document.getElementById('musicSeekBar');
+        const timeDisp = document.getElementById('musicTimeDisplay');
+        if (!seek || !timeDisp) return;
 
-    container.innerHTML = leaderboard.slice(0, 8).map((entry, index) => {
-        const rankBadge = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`;
-        const rowBg = entry.isUser ? 'bg-yellow-50 border-l-4 border-[#AF3C43]' : 'bg-white';
+        if (musicPlayer.duration) {
+            seek.value = (musicPlayer.currentTime / musicPlayer.duration) * 100;
+            timeDisp.textContent = `${formatTime(musicPlayer.currentTime)} / ${formatTime(musicPlayer.duration)}`;
+        }
+    });
+
+    musicPlayer.addEventListener('ended', () => {
+        nextTrack();
+    });
+}
+
+function formatTime(sec) {
+    if (isNaN(sec)) return "0:00";
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function renderPlaylist() {
+    const container = document.getElementById('playlistContainer');
+    if (!container) return;
+
+    container.innerHTML = ogrPlaylist.map((track, idx) => {
+        const isCurrent = idx === currentTrackIndex;
+        const rowBg = isCurrent ? 'bg-red-50 border-l-4 border-[#AF3C43] font-bold text-[#AF3C43]' : 'hover:bg-gray-100 text-gray-800';
+        const icon = (isCurrent && isMusicPlaying) ? 'fa-volume-high animate-pulse text-[#AF3C43]' : 'fa-music text-gray-400';
+
         return `
-            <div class="px-4 py-2.5 flex items-center justify-between text-xs sm:text-sm ${rowBg}">
-                <div class="flex items-center space-x-2.5">
-                    <span class="font-mono font-bold w-6 text-gray-600">${rankBadge}</span>
-                    <div>
-                        <div class="font-bold text-gray-900 flex items-center gap-1.5">
-                            <span>${escapeHtml(entry.handle)}</span>
-                            <span class="text-[10px] font-mono bg-gray-200 text-gray-700 px-1.5 py-0.2 rounded">${entry.province}</span>
-                        </div>
-                        <div class="text-[11px] text-gray-500">${entry.game}</div>
-                    </div>
+            <button onclick="selectTrack(${idx})" class="w-full text-left px-4 py-3 flex items-center justify-between text-xs sm:text-sm transition cursor-pointer ${rowBg}">
+                <div class="flex items-center space-x-3 truncate pr-2">
+                    <span class="font-mono text-xs text-gray-400 w-4">${idx + 1}.</span>
+                    <span class="truncate">${track.title}</span>
                 </div>
-                <div class="font-mono font-bold text-[#284162]">
-                    ${entry.score.toLocaleString()} <span class="text-[10px] font-normal">pts</span>
-                </div>
-            </div>
+                <i class="fa-solid ${icon} text-xs flex-shrink-0"></i>
+            </button>
         `;
     }).join('');
 }
 
-function escapeHtml(str) {
-    return String(str).replace(/[&<>"']/g, s => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    }[s]));
+function loadTrack(index, autoPlay = false) {
+    if (ogrPlaylist.length === 0) return;
+    currentTrackIndex = index;
+    musicPlayer.src = ogrPlaylist[currentTrackIndex].file;
+    
+    const titleEl = document.getElementById('nowPlayingTitle');
+    if (titleEl) titleEl.textContent = ogrPlaylist[currentTrackIndex].title;
+
+    const seek = document.getElementById('musicSeekBar');
+    if (seek) seek.value = 0;
+
+    if (autoPlay) {
+        musicPlayer.play().then(() => {
+            isMusicPlaying = true;
+            updateMusicUI();
+        }).catch(() => {
+            isMusicPlaying = false;
+            updateMusicUI();
+        });
+    } else {
+        isMusicPlaying = false;
+        updateMusicUI();
+    }
+    renderPlaylist();
 }
 
-function recordScoreInRegistry(scoreVal) {
-    if (scoreVal <= 0) return;
-    if (scoreVal > highestUserSessionScore) {
-        highestUserSessionScore = scoreVal;
-    }
-
-    // Safety check to prevent freeze when input handle element is commented out
-    const handleElem = document.getElementById('citizenHandle');
-    const handleInput = handleElem ? handleElem.value.trim() : 'Citizen_CAN';
-
-    const gameNames = {
-        pothole: "Pothole Patrol",
-        goose: "Cobra Chicken Defense",
-        tapper: "Maple Syrup Tapper",
-        flappy: "Flappy Goose"
-    };
-    const gameLabel = gameNames[activeGameKey];
-
-    const existingIndex = leaderboard.findIndex(e => e.isUser && e.game === gameLabel);
-    if (existingIndex !== -1) {
-        if (scoreVal > leaderboard[existingIndex].score) {
-            leaderboard[existingIndex].score = scoreVal;
-            leaderboard[existingIndex].handle = handleInput;
-        }
+function selectTrack(index) {
+    if (index === currentTrackIndex) {
+        togglePlayMusic();
     } else {
-        leaderboard.push({
-            handle: handleInput,
-            province: currentLang === 'fr' ? 'QC' : 'CAN',
-            game: gameLabel,
-            score: scoreVal,
-            isUser: true
+        loadTrack(index, true);
+    }
+}
+
+function togglePlayMusic() {
+    if (ogrPlaylist.length === 0) return;
+    if (isMusicPlaying) {
+        musicPlayer.pause();
+        isMusicPlaying = false;
+        updateMusicUI();
+    } else {
+        musicPlayer.play().then(() => {
+            isMusicPlaying = true;
+            updateMusicUI();
+        }).catch(err => {
+            console.error("Audio file not found or blocked:", err);
+            const statusText = document.getElementById('musicStatusText');
+            if (statusText) statusText.textContent = "FILE NOT FOUND";
         });
     }
-    renderLeaderboard();
+    renderPlaylist();
 }
 
-function resetLeaderboard() {
-    leaderboard = JSON.parse(JSON.stringify(defaultLeaderboard));
-    renderLeaderboard();
-    playSound('blip');
+function prevTrack() {
+    const nextIdx = (currentTrackIndex - 1 + ogrPlaylist.length) % ogrPlaylist.length;
+    loadTrack(nextIdx, true);
 }
 
-function activateOrderInCouncilBoost() {
-    playSound('pickup');
-    score += 500;
-    updateHUD();
-    recordScoreInRegistry(score);
-    showOfficialModal('subsidy');
+function nextTrack() {
+    const nextIdx = (currentTrackIndex + 1) % ogrPlaylist.length;
+    loadTrack(nextIdx, true);
+}
+
+function seekMusic(val) {
+    if (musicPlayer.duration) {
+        musicPlayer.currentTime = (val / 100) * musicPlayer.duration;
+    }
+}
+
+function changeMusicVolume(val) {
+    musicPlayer.volume = parseFloat(val);
+}
+
+function updateMusicUI() {
+    const playIcon = document.getElementById('musicPlayIcon');
+    const statusText = document.getElementById('musicStatusText');
+    const spinIcon = document.getElementById('musicSpinIcon');
+
+    if (!playIcon || !statusText || !spinIcon) return;
+
+    if (isMusicPlaying) {
+        playIcon.className = "fa-solid fa-pause text-sm";
+        statusText.textContent = "NOW PLAYING";
+        spinIcon.className = "fa-solid fa-compact-disc fa-spin text-green-400";
+    } else {
+        playIcon.className = "fa-solid fa-play text-sm";
+        statusText.textContent = "PAUSED";
+        spinIcon.className = "fa-solid fa-compact-disc text-yellow-400";
+    }
 }
 
 /***********************************************************************
- * 4. MULTI-GAME HTML5 CANVAS ENGINE
+ * 5. MULTI-GAME HTML5 CANVAS ENGINE
  ***********************************************************************/
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -547,6 +565,9 @@ function switchGame(gameKey) {
     document.getElementById('canvasOverlay').classList.remove('hidden');
     document.getElementById('startBtnText').textContent = i18n[currentLang].insertLoonie;
 
+    lives = (activeGameKey === 'flappy') ? 1 : 3;
+    updateHUD();
+
     syncCabinetTexts();
     drawStaticPreview();
 }
@@ -568,8 +589,6 @@ function syncCabinetTexts() {
 function updateHUD() {
     document.getElementById('liveScoreDisplay').textContent = score.toLocaleString();
     
-    // For Flappy Goose, only show remaining lives without empty hearts.
-    // For all other games, show up to 3 total spots (🍁 = alive, 🖤 = dead)
     if (activeGameKey === 'flappy') {
         document.getElementById('liveStatusDisplay').textContent = '🍁'.repeat(Math.max(0, lives));
     } else {
@@ -580,10 +599,7 @@ function updateHUD() {
 function startCurrentGame() {
     playSound('coin');
     score = 0;
-    
-    // Insta-death for Flappy Goose (1 life only)
     lives = (activeGameKey === 'flappy') ? 1 : 3;
-    
     frameCount = 0;
     isPlaying = true;
     updateHUD();
@@ -602,7 +618,6 @@ function startCurrentGame() {
 function endGame() {
     isPlaying = false;
     playSound('gameover');
-    recordScoreInRegistry(score);
 
     const banner = document.getElementById('finalScoreBanner');
     banner.classList.remove('hidden');
@@ -621,10 +636,6 @@ function gameLoop() {
     else if (activeGameKey === 'goose') updateAndDrawGoose();
     else if (activeGameKey === 'tapper') updateAndDrawTapper();
     else if (activeGameKey === 'flappy') updateAndDrawFlappy();
-
-    if (frameCount % 60 === 0 && score > 0) {
-        recordScoreInRegistry(score);
-    }
 
     if (isPlaying) {
         animationFrameId = requestAnimationFrame(gameLoop);
@@ -1171,18 +1182,15 @@ function handleFlappyDeath() {
 function updateAndDrawFlappy() {
     const st = flappyState;
 
-    // Apply gravity
     st.vy += st.gravity;
     st.y += st.vy;
     st.wingPhase += 0.3;
 
-    // Hit Floor or Ceiling
     if (st.y > canvas.height - 15 || st.y < 0) {
         handleFlappyDeath();
         return;
     }
 
-    // Spawn Peace Tower Pipes
     if (frameCount % 110 === 0) {
         const gap = 150;
         const minHeight = 50;
@@ -1196,11 +1204,10 @@ function updateAndDrawFlappy() {
         });
     }
 
-    // Draw Sky Background
     ctx.fillStyle = '#e0f2fe';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Detailed Parliament Silhouette Background (Repeating every 400px)
+    // Repeating Parliament Hill Silhouette
     st.bgOffset = (st.bgOffset + 0.5) % 400;
     ctx.fillStyle = '#cbd5e1'; 
     for (let i = -1; i < canvas.width / 400 + 1; i++) {
@@ -1209,32 +1216,28 @@ function updateAndDrawFlappy() {
 
         ctx.beginPath();
         ctx.moveTo(px, baseY);
-        
-        // Left building wing with slanted roof
         ctx.lineTo(px, baseY - 80);
         ctx.lineTo(px + 10, baseY - 120);
         ctx.lineTo(px + 40, baseY - 120);
-        ctx.lineTo(px + 50, baseY - 140); // small spire
+        ctx.lineTo(px + 50, baseY - 140);
         ctx.lineTo(px + 60, baseY - 120);
         ctx.lineTo(px + 130, baseY - 120);
         ctx.lineTo(px + 150, baseY - 80);
         
-        // Center Peace Tower
         ctx.lineTo(px + 150, baseY - 160);
         ctx.lineTo(px + 160, baseY - 160);
         ctx.lineTo(px + 160, baseY - 280); 
         ctx.lineTo(px + 155, baseY - 280); 
-        ctx.lineTo(px + 175, baseY - 360); // Peak of tower
+        ctx.lineTo(px + 175, baseY - 360);
         ctx.lineTo(px + 195, baseY - 280); 
         ctx.lineTo(px + 190, baseY - 280);
         ctx.lineTo(px + 190, baseY - 160);
         ctx.lineTo(px + 200, baseY - 160);
         
-        // Right building wing
         ctx.lineTo(px + 200, baseY - 80);
         ctx.lineTo(px + 220, baseY - 120);
         ctx.lineTo(px + 290, baseY - 120);
-        ctx.lineTo(px + 300, baseY - 140); // small spire
+        ctx.lineTo(px + 300, baseY - 140);
         ctx.lineTo(px + 310, baseY - 120);
         ctx.lineTo(px + 340, baseY - 120);
         ctx.lineTo(px + 350, baseY - 80);
@@ -1242,7 +1245,6 @@ function updateAndDrawFlappy() {
         ctx.lineTo(px + 400, baseY);
         ctx.fill();
 
-        // Simple Clock Face on the background Peace Tower
         ctx.fillStyle = '#fef08a';
         ctx.beginPath();
         ctx.arc(px + 175, baseY - 250, 10, 0, Math.PI * 2);
@@ -1250,12 +1252,10 @@ function updateAndDrawFlappy() {
         ctx.fillStyle = '#cbd5e1'; 
     }
 
-    // Update and Draw Pipes
     for (let i = st.pipes.length - 1; i >= 0; i--) {
         const p = st.pipes[i];
         p.x -= st.speed;
 
-        // Score logic
         if (!p.passed && p.x + 60 < 100) {
             p.passed = true;
             score += 10;
@@ -1263,7 +1263,6 @@ function updateAndDrawFlappy() {
             playSound('pickup');
         }
 
-        // Collision logic
         const gooseBox = { x: 80, y: st.y - 12, w: 36, h: 24 }; 
         const topPipeBox = { x: p.x, y: 0, w: 60, h: p.topHeight };
         const botPipeBox = { x: p.x, y: p.bottomY, w: 60, h: canvas.height - p.bottomY };
@@ -1276,9 +1275,7 @@ function updateAndDrawFlappy() {
             return;
         }
 
-        // Draw Inverted Top Pipe
         drawPeaceTowerPipe(p.x, 0, 60, p.topHeight, true);
-        // Draw Bottom Pipe
         drawPeaceTowerPipe(p.x, p.bottomY, 60, canvas.height - p.bottomY, false);
 
         if (p.x < -60) {
@@ -1286,7 +1283,6 @@ function updateAndDrawFlappy() {
         }
     }
 
-    // Draw the Player Goose
     drawCanadaGoose(100, st.y, st.wingPhase);
 }
 
@@ -1331,7 +1327,7 @@ function resetToDashboard() {
 }
 
 /***********************************************************************
- * 5. OFFICIAL GOVERNMENT HUMOR MODALS
+ * 6. OFFICIAL GOVERNMENT HUMOR MODALS
  ***********************************************************************/
 function showOfficialModal(topic) {
     playSound('blip');
@@ -1345,23 +1341,17 @@ function showOfficialModal(topic) {
             enB: "Every Canadian citizen or permanent resident has the statutory right to request ↑ ↑ ↓ ↓ ← → ← → B A from the Information Commissioner. Requests must be accompanied by a medium Double-Double.",
             frB: "Tout citoyen canadien a le droit statutaire de demander ↑ ↑ ↓ ↓ ← → ← → B A au Commissaire à l'information. Toute demande doit être accompagnée d'un café deux-deux moyen."
         },
-        subsidy: {
-            enT: "Order-in-Council PC-2026-0500: Pixel Stimulus Granted",
-            frT: "Décret C.P. 2026-0500 : Subvention de pixels accordée",
-            enB: "Congratulations! 500 Canadian Heritage points have been credited directly to your active arcade score and registered in the National Registry of High Scores.",
-            frB: "Félicitations! 500 points du Patrimoine canadien ont été crédités directement à votre score actif et inscrits au Registre national."
-        },
         problem: {
-            enT: "Report a Pothole or Aggressive Goose Incident",
-            frT: "Signaler un nid-de-poule ou un incident de bernache",
-            enB: "Thank you for your civic vigilance. Municipal snowplows and Certified Bagel Negotiators have been dispatched to your coordinates. Estimated arrival: Shortly after hockey season.",
-            frB: "Merci de votre vigilance civique. Des déneigeuses municipales et des négociateurs en bagels ont été dépêchés. Arrivée prévue : peu après les séries éliminatoires."
+            enT: "Feedback & Civic Incident Report",
+            frT: "Commentaires et signalement d'incident",
+            enB: "Thank you for your feedback! To report a bug or suggest an idea, message @hatrickhd on Instagram.",
+            frB: "Merci pour vos commentaires!"
         },
         default: {
-            enT: "Official Crown Copyright & Heritage Notice",
-            frT: "Avis officiel du droit d'auteur de la Couronne",
-            enB: "© His Majesty the King in Right of Canada, represented by the Minister of Canadian Heritage & Pixel Arts, 2026. All 8-bit honks and maple syrup physics are protected under Crown Copyright.",
-            frB: "© Sa Majesté le Roi du chef du Canada, représenté par le ministre du Patrimoine canadien et des Arts pixelisés, 2026. Tous les klaxons 8 bits sont protégés."
+            enT: "Official Notice",
+            frT: "Avis officiel",
+            enB: "This is an unofficial parody portal created by Hatrick-Dev.",
+            frB: "Ceci est un portail parodique non officiel créé par Hatrick-Dev."
         }
     };
 
@@ -1379,7 +1369,9 @@ function closeModal() {
 function handleSearch(e) {
     e.preventDefault();
     const q = document.getElementById('gcSearchInput').value.toLowerCase();
-    if (q.includes('goose') || q.includes('cobra') || q.includes('bernache')) {
+    if (q.includes('flappy')) {
+        switchGame('flappy');
+    } else if (q.includes('goose') || q.includes('cobra') || q.includes('bernache')) {
         switchGame('goose');
     } else if (q.includes('syrup') || q.includes('maple') || q.includes('sirop') || q.includes('tapper')) {
         switchGame('tapper');
@@ -1391,7 +1383,7 @@ function handleSearch(e) {
 }
 
 window.onload = function () {
-    renderLeaderboard();
+    initMusicPlayer();
     syncCabinetTexts();
     drawStaticPreview();
 };
